@@ -1,0 +1,141 @@
+user: User {shape: person}
+MetaMask: MetaMask {
+Account
+}
+Workbench: Workbench {
+Storage: Storage {
+totalStorage: {
+shape: cylinder
+style.multiple: true
+}
+Used Storage: {
+shape: cylinder
+style.multiple: true
+}
+}
+Upload: Upload File {
+drop: {
+shape: page
+style.multiple: true
+}
+browse: {
+shape: page
+style.multiple: true
+}
+}
+searchInput: search Input {
+Keyword search
+tag
+}
+FileList: File List {
+name
+size
+togs
+ToDetail
+Comment
+}
+
+Upload -> Not Show: fail(Can not view the results in the list)
+searchInput -> FileList: 1.My Storage: Filters the keyword of the current table
+FileList -> searchInput: return data
+}
+
+SearchPage: Search {
+chain: Full chain search {
+shape: cloud
+style.multiple: true
+}
+FileSequence: File Sequence {
+formatAdotName: Name {
+mirror
+weweave
+smartWeaveContract
+twitter
+mscProject
+other
+}
+
+getAdotData -> result: /arweave/search/test
+result -> formatAdotName: format
+}
+}
+UploadLogic: Upload {
+before: Before Upload {
+addTags
+modifyFileName
+}
+file -> before
+before -> send Transactions: Upload the file and put it on the blockchain
+}
+FileListPage: File List {
+arsending-sdk: arsending SDK {
+getOrders
+getItemMeta
+formatResultData
+
+getOrders -> getItemMeta: Each piece of data requires a separate request for getItemMeta
+}
+everpay: everpay SDK {
+getBalances: get all token and balance
+formatBalanceData
+
+getBalances -> formatBalanceData
+}
+
+arsending-sdk -> everpay -> formatBalanceData
+}
+
+Deposit: Deposit {
+select: Select Token {
+SelectChainNetwork
+SelectToken
+}
+CurrencyConversion
+ArToStorage: 1AR ≈ 0.76 GB Storage {
+shape: document
+style.multiple: true
+}
+chainNetWork: chain NetWork {
+shape: document
+style.multiple: true
+
+Ethereum
+BSC
+Moonbeam
+}
+
+select -> CurrencyConversion -> deposit
+select.SelectChainNetwork -> chainNetWork
+}
+
+Detail: Detail Page {
+Preview: Preview File {
+pdf
+image
+video
+audio
+}
+fileInfo
+download
+copyUrl
+ToAR
+}
+
+user -> Metamask: window.ethereum.request
+Metamask -> Workbench: Login
+
+Workbench.Storage -> Deposit: if need deposit
+Workbench.Storage -> Workbench.Upload: Upload enough space to upload files
+
+Workbench.Upload -> UploadLogic.file
+Workbench.Upload -> Workbench.FileList: success(View the results in the list)
+
+Workbench.FileList -> FileListPage: logic
+Workbench.FileList.ToDetail -> Detail
+
+Workbench.searchInput -> SearchPage: 2.All Storage:Full chain search, using adot
+FileListPage.formatBalanceData -> Workbench.Storage: 1AR ≈ 0.76 GB Storage
+
+Detail.ToAR -> AR website: https://viewblock.io/
+
+MetaMask <-> Deposit: Multiple call

@@ -1,0 +1,12 @@
+The first version was pushed to GitLab, implementing features such as:
+- Purchasing storage space
+- File uploads
+- File Viewing
+- File sharing
+- Automatic uploading
+
+The next step in the implementation of the features include:
+- Encryption of files before uploading
+- Permission control
+- UI optimization
+- Test

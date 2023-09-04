@@ -34,6 +34,11 @@ const router = new Router({
                     component: () => import('@/pages/depositPage')
                 },
                 {
+                    path: 'write',
+                    name: 'write',
+                    component: () => import('@/pages/writeContentPage')
+                },
+                {
                     path: 'search/:searchValue',
                     name: 'Search',
                     component: () => import('@/pages/searchPage')

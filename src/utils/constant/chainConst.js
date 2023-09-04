@@ -58,3 +58,8 @@ export const tokenListHasLogo = [
     'arg',
     'fra'
 ]
+
+// The length of hex address bytes (without checksum)
+export const ADDRESS_BYTE_LENGTH = 30
+// The alphabet for base26 algorithm for content info encoding
+export const ADDRESS_ALPHABET = '83456729ABCDFGHJKNPQRSTWYZ'

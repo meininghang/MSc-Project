@@ -9,7 +9,7 @@
         <iframe
             height="400"
             width="540"
-            :src="`https://widget.0xecho.com?color-theme=light&desc=&has-h-padding=true&has-v-padding=true&modules=comment%2Clike&receiver=&target_uri=${planetIrl}/${fileId}`"
+            :src="`https://widget.0xecho.com?color-theme=light&desc=&has-h-padding=true&has-v-padding=true&modules=tip%2Ccomment%2Clike&receiver=${receiver}&target_uri=${planetIrl}/${fileId}`"
             frameborder="0"></iframe>
       </div>
     </el-dialog>
@@ -22,15 +22,17 @@ export default {
   data() {
     return {
       showComment: false,
-      // todo... 4everland url or websever
-      planetIrl: 'http://www.xxxxx',
-      fileId: ''
+      // todo... 4everland url
+      planetIrl: 'https://msc.4everland.app/#/main',
+      fileId: '',
+      receiver: ''
     }
   },
   methods: {
-    openDialog(id) {
+    openDialog(id, receiver) {
       this.showComment = true
       this.fileId = id
+      this.receiver = receiver ? receiver : ''
     }
   }
 }

@@ -25,12 +25,15 @@
             <div v-else-if="fileDetail.fileType && (fileDetail.fileType.includes('pdf') || fileDetail.fileType.includes('text'))">
               <iframe id="iframe" width="665" height="665" :src="`https://arseed.web3infra.dev/${fileItemId}`"></iframe>
             </div>
-<!--            <div v-else-if="fileDetail.fileType && (fileDetail.fileType.includes('json') || fileDetail.fileType.includes('text'))">-->
-<!--              <div class="json-text-style">-->
-<!--                <pre>{{fileDetail.info}}</pre>-->
-<!--                &lt;!&ndash;                {{JSON.stringify(JSON.parse(fileDetail.body), null, '\t')}}&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
+            <div v-else-if="fileDetail.isMSCText && fileDetail.fileType.includes('json')">
+              <p v-html="fileDetail.info" style="width: 665px;height: 665px"></p>
+            </div>
+            <div v-else-if="fileDetail.fileType && !fileDetail.isMSCText && (fileDetail.fileType.includes('json') || fileDetail.fileType.includes('text'))">
+              <div class="json-text-style">
+                <pre>{{fileDetail.info}}</pre>
+                <!--                {{JSON.stringify(JSON.parse(fileDetail.body), null, '\t')}}-->
+              </div>
+            </div>
             <div v-else>
               <p class="file-detail-other-type-show" @click="viewFile">
                 <i class="el-icon-paperclip"></i>
@@ -128,10 +131,7 @@ export default {
     },
   },
   async mounted() {
-    let obj = this.allOrderList.filter(item => item.itemId === this.$route.params.id)[0]
-    if (!obj) {
-      obj = JSON.parse(sessionStorage.getItem('FILE_DETAIL_JSON'))
-    }
+    let obj = JSON.parse(sessionStorage.getItem('FILE_DETAIL_JSON'))
     obj.newTags = obj.tags.filter(item => !((item.name.toUpperCase()).indexOf('Name'.toUpperCase()) >= 0 || (item.name.toUpperCase()).indexOf('type'.toUpperCase()) >= 0))
     if (obj.tags.find(item => item.name.toUpperCase() === 'weave-collect'.toUpperCase())) {
       obj.isCollet = true

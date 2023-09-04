@@ -10,6 +10,10 @@
           <img class="logo-style" src="../../assets/img/MetaMask_Fox.svg.png" alt="MetaMask">
           MetaMask
         </div>
+<!--        <div class="wallet-name-box" @click="openGoogle">-->
+<!--          <img class="logo-style" src="../../assets/img/MetaMask_Fox.svg.png" alt="MetaMask">-->
+<!--          Othent-->
+<!--        </div>-->
       </div>
       <p class="needing-attention">By connecting your wallet you agree to <br/> the Terms of Service and Privacy Policy</p>
     </el-dialog>
@@ -18,6 +22,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
+// import { Othent } from 'othent'
 
 export default {
   name: "loginWallet",
@@ -52,6 +57,14 @@ export default {
       } else {
         this.$message.error('Account verification failed')
       }
+    },
+    async openGoogle() {
+      // const othent = await Othent({
+      //   API_ID: '64e59f795c581daf3c18f9e7be2ea917'
+      // })
+      // // const response = await othent.ping()
+      // const userInfo = await othent.logIn()
+      // console.log(userInfo)
     }
   }
 }

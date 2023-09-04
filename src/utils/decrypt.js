@@ -1,7 +1,7 @@
 import {MindLake} from 'mind-lake-sdk'
 
-// todo... need add your appKey(https://github.com/mind-network/mind-lake-sdk-typescript/blob/main/tutorial/Configure_AppKey.md)
-const mindLake = await MindLake.getInstance("YOU OWN APP KEY")
+const appKey = '3KjBLshwhIt1QAKgHda72GeF0UrzlOoT/1bfyg2p79w='
+const mindLake = await MindLake.getInstance(appKey)
 
 const permission =  mindLake.permission
 const dataLake =  mindLake.dataLake

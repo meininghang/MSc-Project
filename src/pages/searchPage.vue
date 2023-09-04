@@ -35,136 +35,6 @@
               :currentPage="currentPage"></fileList>
         </div>
       </el-col>
-<!--      <el-col :span="8" style="min-height: 500px">-->
-<!--        <div class="search-left-list">-->
-<!--          <div style="margin: 10px 0">File Detail</div>-->
-<!--        </div>-->
-<!--        <div class="search-right-top" style="width: 400px;">-->
-<!--          <div class="dile-detail-left" style="width: 400px;height: auto">-->
-<!--            <div v-if="fileDetail.fileType && fileDetail.fileType.includes('image')">-->
-<!--              <img-->
-<!--                  width="400"-->
-<!--                  height="auto"-->
-<!--                  class="detail-left-style"-->
-<!--                  :src="`https://arseed.web3infra.dev/${fileDetail.itemId ? fileDetail.itemId : fileDetail.hash}`"-->
-<!--                  alt=""/>-->
-<!--            </div>-->
-<!--            <div v-else-if="fileDetail.fileType && fileDetail.fileType.includes('audio')">-->
-<!--              <audio-->
-<!--                  loop-->
-<!--                  controls-->
-<!--                  :src="`https://arseed.web3infra.dev/${fileDetail.itemId ? fileDetail.itemId : fileDetail.hash}`">-->
-<!--                {{ $t("message.fileDetail.audioText") }}-->
-<!--              </audio>-->
-<!--            </div>-->
-<!--            <div v-else-if="fileDetail.fileType && fileDetail.fileType.includes('video')">-->
-<!--              <video-->
-<!--                  width="400"-->
-<!--                  class="detail-left-style"-->
-<!--                  height="auto"-->
-<!--                  :src="`https://arseed.web3infra.dev/${fileDetail.itemId ? fileDetail.itemId : fileDetail.hash}`"-->
-<!--                  controls="controls">-->
-<!--                {{ $t("message.fileDetail.videoText") }}-->
-<!--              </video>-->
-<!--            </div>-->
-<!--            <div v-else-if="fileDetail.fileType && (fileDetail.fileType.includes('pdf') || fileDetail.fileType.includes('text'))">-->
-<!--              <iframe-->
-<!--                  id="iframeSearchDetail"-->
-<!--                  width="400"-->
-<!--                  height="405"-->
-<!--                  :src="`https://arseed.web3infra.dev/${fileDetail.itemId ? fileDetail.itemId : fileDetail.hash}`"></iframe>-->
-<!--            </div>-->
-<!--            <div v-else-if="fileDetail.fileType && (fileDetail.fileType.includes('json') || fileDetail.fileType.includes('text'))">-->
-<!--              <div class="json-text-style">-->
-<!--                <pre>{{ fileDetail.info }}</pre>-->
-<!--                &lt;!&ndash;                {{JSON.stringify(JSON.parse(fileDetail.body), null, '\t')}}&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div v-else style="text-align: center">-->
-<!--              <el-empty :description="$t('message.homePage.fileList.noData')"></el-empty>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash;          <iframe id="iframeSearchDetail" width="665" height="665" :src="`https://arseed.web3infra.dev/${fileItemId}`"></iframe>&ndash;&gt;-->
-<!--        </div>-->
-<!--        <div v-if="fileDetail && Object.keys(fileDetail).length !== 0" class="file-detail-right-info">-->
-<!--          <div class="detail-title">-->
-<!--            <p-->
-<!--                v-if="fileDetail.fileType && fileDetail.fileType.includes('image')"-->
-<!--                class="span-table-text"-->
-<!--                style="display: flex;align-items: center">-->
-<!--              <img src="../assets/svg/icon-one.svg" alt="" style="margin-right: 13px">-->
-<!--              {{ fileDetail.fileName }}-->
-<!--            </p>-->
-<!--            <p-->
-<!--                v-else-if="fileDetail.fileType && fileDetail.fileType.includes('audio')"-->
-<!--                class="span-table-text">-->
-<!--              <img src="../assets/svg/icon-four.svg" alt="" style="margin-right: 13px">-->
-<!--              {{ fileDetail.fileName }}-->
-<!--            </p>-->
-<!--            <p-->
-<!--                v-else-if="fileDetail.fileType && (fileDetail.fileType.includes('word') || fileDetail.fileType.includes('pdf'))"-->
-<!--                class="span-table-text">-->
-<!--              <img src="../assets/svg/icon-three.svg" alt="" style="margin-right: 13px">-->
-<!--              {{ fileDetail.fileName }}-->
-<!--            </p>-->
-<!--            <p-->
-<!--                v-else-if="fileDetail.fileType && fileDetail.fileType.includes('video')"-->
-<!--                class="span-table-text">-->
-<!--              <img src="../assets/svg/icon-five.svg" alt="" style="margin-right: 13px">-->
-<!--              {{ fileDetail.fileName }}-->
-<!--            </p>-->
-<!--            <p-->
-<!--                v-else-->
-<!--                class="span-table-text">-->
-<!--              <img src="../assets/svg/icon-two.svg" alt="" style="margin-right: 13px">-->
-<!--              {{ fileDetail.fileName }}-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <p class="item-fileInfo">-->
-<!--            <span class="item-content">{{ $t("message.fileDetail.timestamp") }}:</span>-->
-<!--            {{ fileDetail.timeStampStr }}-->
-<!--          </p>-->
-<!--          <p v-if="fileDetail.fileSize" class="item-fileInfo">-->
-<!--            <span class="item-content">{{ $t("message.fileDetail.size") }}:</span>-->
-<!--            {{ fileDetail.fileSize }}-->
-<!--          </p>-->
-<!--          <p v-if="fileDetail.height" class="item-fileInfo">-->
-<!--            <span class="item-content">{{ $t("message.fileDetail.height") }}:</span>-->
-<!--            {{ fileDetail.height }}-->
-<!--          </p>-->
-<!--          <p class="item-fileInfo">-->
-<!--            <span class="item-content">-->
-<!--              {{ $t("message.fileDetail.FileType") }}:</span>-->
-<!--            {{ fileDetail.fileType }}-->
-<!--          </p>-->
-<!--          &lt;!&ndash;            <p><span class="item-content">Age:</span> </p>&ndash;&gt;-->
-<!--          &lt;!&ndash;            <p><span class="item-content">Tx Index:</span> </p>&ndash;&gt;-->
-<!--          &lt;!&ndash;            <p><span class="item-content">Height:</span> {{ txInfoByHash.rawId }}</p>&ndash;&gt;-->
-<!--          &lt;!&ndash;            <p><span class="item-content">Confirmations:</span> </p>&ndash;&gt;-->
-<!--          <p v-if="fileDetail.fee && fileDetail.decimals" class="item-fileInfo">-->
-<!--            <span class="item-content">{{ $t("message.fileDetail.fee") }}:</span>-->
-<!--            {{ `${fileDetail.fee / (Math.pow(10, Number(fileDetail.decimals)))}${fileDetail.currency}` }}-->
-<!--          </p>-->
-<!--        </div>-->
-<!--        <div v-if="fileDetail && Object.keys(fileDetail).length !== 0" class="file-detail-button">-->
-<!--          <p class="download-button" style="display: flex;align-items: center;justify-content: center" @click="download">-->
-<!--            <img src="../assets/svg/Download.svg" style="margin-right: 5px" alt="">-->
-<!--            {{ $t("message.button.download") }} ({{ fileDetail.fileSize }})-->
-<!--          </p>-->
-<!--          <p class="copy-button" style="display: flex;align-items: center;justify-content: center" id="copyURLBtn" @click="copyUrl">-->
-<!--            <img src="../assets/svg/link.svg" style="margin-right: 5px" alt="">-->
-<!--            {{ $t("message.button.copyUrl") }}-->
-<!--          </p>-->
-<!--          <p class="copy-button" style="display: flex;align-items: center;justify-content: center" @click="clickToARTxPage">-->
-<!--            <img src="../assets/svg/icon_logo.svg" style="margin-right: 5px" alt="">-->
-<!--            {{ $t("message.fileDetail.explorer") }}-->
-<!--          </p>-->
-<!--          <p class="copy-button" style="display: flex;align-items: center;justify-content: center" @click="collectFile">-->
-<!--            <img src="../assets/svg/collect-icon.svg" style="margin-right: 5px" alt="">-->
-<!--            {{ $t("message.button.collectButton") }}-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </el-col>-->
     </el-row>
   </div>
 </template>
@@ -255,15 +125,15 @@ export default {
     async searchCategory(value) {
       await this.handleClick(1, value)
     },
-    changeTableData() {
-      // this.tableData = this.tableData.map(item => {
-      //   if (item.itemId === value.itemId) {
-      //     item.showButton = true
-      //   } else {
-      //     item.showButton = false
-      //   }
-      //   return item
-      // })
+    changeTableData(value) {
+      this.tableData = this.tableData.map(item => {
+        if (this.$route.query.searchTab === 'allFile') {
+          item.showButton = false
+        } else {
+          item.showButton = item.itemId === value.itemId
+        }
+        return item
+      })
     },
     viewDetail(item) {
       this.fileDetail = {}

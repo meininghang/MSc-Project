@@ -7,6 +7,7 @@
         style="width: 100%"
         v-loading="loading"
         @cell-mouse-enter="changeButton"
+        @row-click="clickToDetail"
         @cell-mouse-leave	="closeButton">
       <el-table-column
           prop="name"
@@ -65,11 +66,11 @@
         <template slot-scope="scope">
           <!--          {{scope.row.showButton}}-->
           <div v-if="scope.row.showButton" class="view-button">
-            <span class="click-to-detail" @click="clickToDetail(scope.row)">
+            <span class="click-to-detail" @click.stop="clickToDetail(scope.row)">
               <img src="../../assets/svg/eye.svg" alt="">
               VIEW
           </span>
-            <span class="click-to-detail" @click="comment(scope.row)">
+            <span class="click-to-detail" @click.stop="comment(scope.row)">
               <i class="el-icon-s-comment"/>
               COMMENT
           </span>
@@ -98,6 +99,7 @@
 import {mapGetters} from "vuex"
 import fileIconView from "@/components/commonComponent/fileIconView"
 import commentDialog from "@/components/__dialog/commentDialog"
+import {decodeAddress} from "@/utils/util"
 
 export default {
   name: "fileList",
@@ -143,13 +145,19 @@ export default {
       this.$emit('changePagination', pageIndex)
     },
     clickToDetail(item) {
+      const arr = item.tags.filter(item => item.name === 'MSC-TYPE' && item.value === 'Encrypted-content')
+      if (item.fileType && (item.fileType.includes('json') && arr.length !== 0)) {
+        const body = item.tags.filter(item => item.name === 'MSC-body')[0].value
+        item.info = decodeAddress(body)
+        item.isMSCText = true
+      }
+      sessionStorage.setItem('FILE_DETAIL_JSON', JSON.stringify(item))
       this.$router.push({
         name: "FileDetail",
         params: {
           id: item.itemId ? item.itemId : item.hash
         }
       })
-      sessionStorage.setItem('FILE_DETAIL_JSON', JSON.stringify(item))
     },
     changeButton(value) {
       // this.showButton = true
@@ -160,7 +168,7 @@ export default {
     },
     comment(item) {
       const id = item.itemId ? item.itemId : item.hash
-      this.$refs['commentDialog'].openDialog(id)
+      this.$refs['commentDialog'].openDialog(id, item.Bundler)
     }
   }
 }
@@ -171,7 +179,7 @@ export default {
   min-height: 300px;
   .view-button {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
   }
 }
@@ -219,6 +227,7 @@ export default {
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
+  font-size: 10px;
 }
 .click-to-detail:nth-child(1) {
   margin-right: 5px;

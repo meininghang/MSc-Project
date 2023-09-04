@@ -5,6 +5,9 @@
     </div>
    <div class="header-right-content">
      <div class="layout-header-input">
+       <el-button icon="el-icon-edit" style="width: 150px;margin-right: 10px" @click="writeContent">Write Content</el-button>
+     </div>
+     <div class="layout-header-input">
        <el-input
            v-model="searchInputValue"
            prefix-icon="el-icon-search"
@@ -74,6 +77,11 @@ export default {
         name: 'HomePage'
       })
     },
+    writeContent() {
+      this.$router.push({
+        name: "write"
+      })
+    }
   }
 }
 </script>
@@ -115,7 +123,7 @@ export default {
   }
 
   .header-right-content {
-    width: 400px;
+    width: 550px;
     display: flex;
     align-items: center;
     justify-content: center;

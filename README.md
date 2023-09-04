@@ -1,7 +1,24 @@
 # project-vue2
 
 ## Project setup
+```
+npm install
+```
 
-### Principle of operation
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-![image](https://cdn.staticaly.com/gh/meininghang/image-hosting@main/20230808/image.4z4wzxdggxc0.jpg)
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

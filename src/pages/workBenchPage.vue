@@ -176,9 +176,7 @@ export default {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
         reader.onload = async () => {
-          // todo... Encrypt the file in this place
           const data = reader.result
-          // const data = new Blob([reader.result], { type: files.file.type })
           const ops = {
             tags: [
               {name: "FileName", value: this.changeFileName ? this.changeFileName : file.name},

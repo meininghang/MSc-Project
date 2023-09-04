@@ -1,4 +1,10 @@
 import BN from 'bignumber.js'
+import {Buffer} from 'safe-buffer'
+import baseX from 'base-x'
+import {ADDRESS_ALPHABET, ADDRESS_BYTE_LENGTH} from './constant/chainConst'
+
+const BASE26_0 = ADDRESS_ALPHABET[0]
+const base26 = baseX(ADDRESS_ALPHABET)
 /**
  * Convert to hexadecimal based on string (avatar color)
  * @param str
@@ -77,4 +83,135 @@ export const toBN = (x) => {
         }
     }
     return new BN(x)
+}
+
+/**
+ * Encode hex address to LemoChain address
+ * @param {string|Buffer} data
+ * @return {string}
+ */
+export function encodeAddress(data) {
+    data = toBuffer(data)
+
+    let checkSum = 0
+    for (let i = 0; i < data.length; i++) {
+        checkSum ^= data[i]
+    }
+
+    const fullPayload = Buffer.concat([data, Buffer.from([checkSum])])
+
+    let encoded = base26.encode(fullPayload)
+    while (encoded.length < 36) {
+        encoded = BASE26_0 + encoded
+    }
+
+    return 'MSC-PROJECT' + encoded
+}
+
+/**
+ * Decode content to hex address
+ * @param {string} address
+ * @return {string}
+ */
+export function decodeAddress(address) {
+    if (typeof address !== 'string') {
+        throw new Error('error string')
+    }
+    if (has0xPrefix(address)) {
+        if (new RegExp(`^0x[0-9a-f]{0,${ADDRESS_BYTE_LENGTH * 2}}$`, 'i').test(address)) {
+            return address
+        }
+    }
+    address = address.toUpperCase()
+    if (address.slice(0, 11) !== 'MSC-PROJECT') {
+        // no logo
+        throw new Error('err content')
+    }
+
+    let fullPayload
+    try {
+        fullPayload = base26.decode(address.slice(11))
+    } catch (e) {
+        throw new Error(e.message)
+    }
+    fullPayload = bufferTrimLeft(fullPayload)
+    const maxLenWithCheckSum = ADDRESS_BYTE_LENGTH + 1
+    if (fullPayload.length > maxLenWithCheckSum) {
+        throw new Error('Error lenfth')
+    }
+    const data = fullPayload.slice(0, fullPayload.length - 1)
+    const checkSum = fullPayload[fullPayload.length - 1] || 0
+
+    let realCheckSum = 0
+    for (let i = 0; i < data.length; i++) {
+        realCheckSum ^= data[i]
+    }
+    if (realCheckSum !== checkSum) {
+        throw new Error('error code')
+    }
+    return data.toString()
+}
+
+export function toBuffer(v) {
+    if (Buffer.isBuffer(v)) {
+        return v
+    }
+    if (v === null || v === undefined) {
+        return Buffer.allocUnsafe(0)
+    }
+    if (Array.isArray(v)) {
+        return Buffer.from(v)
+    }
+    if (typeof v === 'string') {
+        // is Hex String
+        if (v.match(/^0x[0-9A-Fa-f]*$/)) {
+            return hexStringToBuffer(v)
+        } else {
+            // encode string as utf8
+            return Buffer.from(v)
+        }
+    }
+    if (typeof v === 'number') {
+        v = v.toString(16)
+        return hexStringToBuffer(v)
+    }
+    // BigNumber object
+    if (BN.isBigNumber(v)) {
+        v = v.toString(16)
+        return hexStringToBuffer(v)
+    }
+    // BN object
+    if (v.toArray) {
+        return Buffer.from(v.toArray())
+    }
+
+    throw new Error('error')
+}
+
+export function hexStringToBuffer(hex) {
+    if (hex.slice(0, 2).toLowerCase() === '0x') {
+        hex = hex.slice(2)
+    }
+    if (hex.length % 2) {
+        hex = `0${hex}`
+    }
+    return Buffer.from(hex, 'hex')
+}
+
+export function has0xPrefix(str) {
+    return typeof str === 'string' && str.slice(0, 2).toLowerCase() === '0x'
+}
+
+export function bufferTrimLeft(buffer) {
+    let i = 0
+    for (; i < buffer.length; i++) {
+        if (buffer[i].toString() !== '0') {
+            buffer = buffer.slice(i)
+            break
+        }
+    }
+    if (i === buffer.length) {
+        buffer = Buffer.allocUnsafe(0)
+    }
+    return buffer
 }

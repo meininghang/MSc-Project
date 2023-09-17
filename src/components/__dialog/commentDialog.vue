@@ -23,7 +23,9 @@ export default {
     return {
       showComment: false,
       // todo... 4everland url
-      planetIrl: 'https://msc.4everland.app/#/main',
+      planetIrl: 'https://msc.4everland.app/#/main',//https://msc-irti8dxv-amandaymd.4everland.app/#/home Subject to 4everland mechanism, may need to be replaced with the latest link
+      fileId: '',
+
       fileId: '',
       receiver: ''
     }

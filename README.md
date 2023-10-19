@@ -1,11 +1,17 @@
-如何使用
+Gitlab: https://git.cs.bham.ac.uk/projects-2022-23/nxm143
+Github: https://github.com/meininghang/MSc-Project
+Dapp Link1: https://msc.4everland.app/#/home
+Dapp Link2: https://msc-irti8dxv-amandaymd.4everland.app/#/main
+User Guide：
 
-1. 在google Chrome中安装[metamask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn),并需要生成新钱包,请注意充值,否则无余额无法使用,可通过信用卡或者币安等购买 ETH 等加密货币,10美元即可;
 
-2. 代码通过 [4EVERLAND](https://www.4everland.org/)进行托管,请注意node环境选择 16.x 以上.其中,4EVERLAND 本身支持导入github文件,可先fork本仓库后导入
-![Screenshot-2023-09-13-at-13](https://cdn.staticaly.com/gh/meininghang/picx-images-hosting@master/20230913/Screenshot-2023-09-13-at-13.31.14.6aaqbz8p1a00.jpg)
-![Screenshot-2023-09-13-at-13](https://cdn.staticaly.com/gh/meininghang/picx-images-hosting@master/20230913/Screenshot-2023-09-13-at-13.31.50.l8zenrz8ylc.jpg)
-两步即可完成,如果失败,务必检查git设置
+Install metamask in google chrome, and need to generate a new wallet, please pay attention to top up, otherwise no balance can not be used, you can buy cryptocurrencies such as ETH through credit cards or coins, etc., $10.
 
-3. 请注意,目前github代码的 git 配置存在问题,如果部署失败,需要重置;
+
+The code is hosted by 4EVERLAND, please note that the node environment is 16.x or above. 4EVERLAND itself supports importing github files, you can fork the repository first and then import it.
+
+
+Users can click on the Dapp link to use it directly.
+
+
 
